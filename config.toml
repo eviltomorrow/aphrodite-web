@@ -13,3 +13,7 @@ maxsize = 20
 [system]
 # pprof 端口
 pprof-listen-port = 6060
+
+http-server-port = 8080
+
+path-html = "/Users/shepard/Workspace/space-go/project/src/github.com/eviltomorrow/aphrodite-web/html"

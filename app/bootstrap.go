@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/eviltomorrow/aphrodite-web/db"
+
 	"github.com/gin-gonic/gin"
 
 	"github.com/eviltomorrow/aphrodite-web/controller"
@@ -13,8 +15,13 @@ import (
 // Port port
 var Port int = 8080
 
+// PathHTML html
+var PathHTML string
+
 // Startup startup
 func Startup() {
+	db.BuildMySQL()
+
 	gin.SetMode(gin.ReleaseMode)
 	gin.DefaultWriter = io.MultiWriter(middleware.LogWriter())
 
@@ -22,6 +29,8 @@ func Startup() {
 	engine.Use(middleware.LogInterceptor())
 	engine.Use(gin.Recovery())
 
+	engine.Static("/static", PathHTML)
+	engine.LoadHTMLGlob(fmt.Sprintf("%s/*.html", PathHTML))
 	engine.GET("/", controller.Index)
 
 	engine.Run(fmt.Sprintf(":%d", Port))

@@ -21,6 +21,7 @@ import (
 	"github.com/eviltomorrow/aphrodite-base/zlog"
 	"github.com/eviltomorrow/aphrodite-web/app"
 	"github.com/eviltomorrow/aphrodite-web/config"
+	"github.com/eviltomorrow/aphrodite-web/db"
 )
 
 const (
@@ -96,7 +97,12 @@ func setupLogConfig() {
 }
 
 func setupGlobalVars() {
+	db.MySQLDSN = cfg.MySQL.DSN
+	db.MySQLMinOpen = cfg.MySQL.MinOpen
+	db.MySQLMaxOpen = cfg.MySQL.MaxOpen
 
+	app.Port = cfg.System.HTTPServerPort
+	app.PathHTML = cfg.System.PathHTML
 }
 
 func printInfo() {

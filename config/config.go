@@ -23,7 +23,9 @@ type MySQL struct {
 
 // System system
 type System struct {
-	PProfListenPort int `json:"pprof-listen-port" toml:"pprof-listen-port"`
+	PProfListenPort int    `json:"pprof-listen-port" toml:"pprof-listen-port"`
+	HTTPServerPort  int    `json:"http-server-port" toml:"http-server-port"`
+	PathHTML        string `json:"path-html" toml:"path-html"`
 }
 
 // Log 日志配置项
@@ -69,5 +71,6 @@ var DefaultGlobalConfig = &Config{
 	},
 	System: System{
 		PProfListenPort: 6070,
+		PathHTML:        "",
 	},
 }

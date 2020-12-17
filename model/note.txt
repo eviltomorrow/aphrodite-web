@@ -7,8 +7,6 @@ SELECT
 	d.low as low,  
 	d.volume as volume, 
 	d.account as account, 
-	d.date as date,
-	if(d.open <= d.close, 'red', 'green') as color,
 	concat(format((d.close - d.yesterday_closed) / d.yesterday_closed * 100, 2), '%') as percent
 FROM stock s
 	LEFT JOIN (

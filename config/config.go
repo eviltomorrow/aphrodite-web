@@ -71,6 +71,6 @@ var DefaultGlobalConfig = &Config{
 	},
 	System: System{
 		PProfListenPort: 6070,
-		PathHTML:        "",
+		PathHTML:        "/usr/share/aphrodite/html",
 	},
 }

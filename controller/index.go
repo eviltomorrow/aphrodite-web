@@ -12,7 +12,7 @@ import (
 
 // Index index
 func Index(c *gin.Context) {
-	var yesterday = time.Now().AddDate(0, 0, -1)
+	var yesterday = time.Now().AddDate(0, 0, -2)
 	var date string
 	switch yesterday.Weekday() {
 	case time.Saturday:

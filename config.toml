@@ -1,0 +1,15 @@
+[mysql]
+dsn = "root:root@tcp(localhost:3306)/aphrodite?charset=utf8mb4&parseTime=true&loc=Local"
+min-open = 5
+max-open = 10
+
+[log]
+disable-timestamp = false
+level = "info"
+format = "text"
+filename = "/tmp/aphrodite-web/data.log"
+maxsize = 20
+
+[system]
+# pprof 端口
+pprof-listen-port = 6060

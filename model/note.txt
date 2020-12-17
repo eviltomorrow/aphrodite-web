@@ -1,0 +1,20 @@
+SELECT 
+	s.code as code, 
+	s.name as name, 
+	d.open as open, 
+	d.close as close, 
+	d.high as high, 
+	d.low as low,  
+	d.volume as volume, 
+	d.account as account, 
+	d.date as date,
+	if(d.open <= d.close, 'red', 'green') as color,
+	concat(format((d.close - d.yesterday_closed) / d.yesterday_closed * 100, 2), '%') as percent
+FROM stock s
+	LEFT JOIN (
+		SELECT *
+		FROM quote_day
+		WHERE date = '2020-09-15'
+	) d
+	ON s.code = d.code
+WHERE d.open IS NOT NULL;

@@ -14,12 +14,13 @@
 	<caption><h3>{{ .date }} 日数据</h3></caption>
    <thead>
       <tr>
+         <th style="width: 50px;">序号</th>
          <th style="width: 80px;">代码</th>
          <th style="width: 80px;">名称</th>
-         <th style="width: 70px;">开盘价</th>
-         <th style="width: 70px;">收盘价</th>
-         <th style="width: 70px;">最高价</th>
-         <th style="width: 70px;">最低价</th>
+         <th style="width: 60px;">开盘价</th>
+         <th style="width: 60px;">收盘价</th>
+         <th style="width: 60px;">最高价</th>
+         <th style="width: 60px;">最低价</th>
          <th style="width: 100px;">成交量</th>
          <th style="width: 150px;">成交金额</th>
          <th style="width: 80px;">百分比</th>
@@ -29,6 +30,7 @@
    <tbody>
       {{ range .quotes}}
       <tr>
+         <td>{{ .Num }}</td>
          <td>{{ .Code }}</td>
          <td>{{ .Name }}</td>
          <td>{{ .Open }}</td>

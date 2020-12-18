@@ -31,6 +31,8 @@ func Index(c *gin.Context) {
 
 	}
 
+	date = "2020-12-02"
+
 	quotes, err := getCache(date)
 	if err == nil {
 		zlog.Debug("Get quotes from redis cache success", zap.Int("quotes-count", len(quotes)))

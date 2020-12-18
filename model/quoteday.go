@@ -37,6 +37,7 @@ WHERE d.open IS NOT NULL order by volume desc limit 100;
 	}
 
 	var quotes = make([]*QuoteDay, 0, 5000)
+	var num = 1
 	for rows.Next() {
 		var quote = QuoteDay{}
 		if err := rows.Scan(
@@ -52,8 +53,11 @@ WHERE d.open IS NOT NULL order by volume desc limit 100;
 		); err != nil {
 			return nil, err
 		}
+		quote.Num = num
 		quote.Date = date
 		quotes = append(quotes, &quote)
+
+		num++
 	}
 	if err = rows.Err(); err != nil {
 		return nil, err
@@ -63,6 +67,7 @@ WHERE d.open IS NOT NULL order by volume desc limit 100;
 
 // QuoteDay quote day
 type QuoteDay struct {
+	Num     int     `json:"num"`
 	Code    string  `json:"code"`
 	Name    string  `json:"name"`
 	Open    float64 `json:"open"`

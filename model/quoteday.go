@@ -29,7 +29,7 @@ FROM stock s
 		WHERE date = ?
 	) d
 	ON s.code = d.code
-WHERE d.open IS NOT NULL;
+WHERE d.open IS NOT NULL order by volume desc limit 100;
 `
 	rows, err := db.QueryContext(ctx, _sql, date)
 	if err != nil {

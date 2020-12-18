@@ -9,9 +9,15 @@ import (
 
 // Config config
 type Config struct {
+	Redis  Redis  `json:"redis" toml:"redis"`
 	MySQL  MySQL  `json:"mysql" toml:"mysql"`
 	Log    Log    `json:"log" toml:"log"`
 	System System `json:"system" toml:"system"`
+}
+
+// Redis redis
+type Redis struct {
+	DSN string `json:"dsn" toml:"dsn"`
 }
 
 // MySQL mysql
@@ -57,6 +63,9 @@ func (cg *Config) String() string {
 
 // DefaultGlobalConfig default global config
 var DefaultGlobalConfig = &Config{
+	Redis: Redis{
+		DSN: "localhost:6379",
+	},
 	MySQL: MySQL{
 		DSN:     "root:root@tcp(localhost:3306)/aphrodite?charset=utf8mb4&parseTime=true&loc=Local",
 		MinOpen: 5,

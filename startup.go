@@ -11,6 +11,8 @@ import (
 	"strings"
 	"syscall"
 
+	"github.com/eviltomorrow/aphrodite-web/cache"
+
 	//
 	"net/http"
 	_ "net/http/pprof"
@@ -97,6 +99,8 @@ func setupLogConfig() {
 }
 
 func setupGlobalVars() {
+	cache.RedisDSN = cfg.Redis.DSN
+
 	db.MySQLDSN = cfg.MySQL.DSN
 	db.MySQLMinOpen = cfg.MySQL.MinOpen
 	db.MySQLMaxOpen = cfg.MySQL.MaxOpen
@@ -130,7 +134,8 @@ func checkpid() {
 }
 
 func registerCleanupFunc() {
-
+	db.CloseMySQL()
+	cache.CloseRedis()
 }
 
 func startupPProfService() {

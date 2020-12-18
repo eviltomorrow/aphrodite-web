@@ -4,11 +4,12 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/eviltomorrow/aphrodite-web/db"
+	"github.com/eviltomorrow/aphrodite-web/cache"
 
 	"github.com/gin-gonic/gin"
 
 	"github.com/eviltomorrow/aphrodite-web/controller"
+	"github.com/eviltomorrow/aphrodite-web/db"
 	"github.com/eviltomorrow/aphrodite-web/middleware"
 )
 
@@ -21,6 +22,7 @@ var PathHTML string
 // Startup startup
 func Startup() {
 	db.BuildMySQL()
+	cache.BuildRedis()
 
 	gin.SetMode(gin.ReleaseMode)
 	gin.DefaultWriter = io.MultiWriter(middleware.LogWriter())

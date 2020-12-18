@@ -3,9 +3,12 @@ dsn = "root:root@tcp(localhost:3306)/aphrodite?charset=utf8mb4&parseTime=true&lo
 min-open = 5
 max-open = 10
 
+[redis]
+dsn = "localhost:6379"
+
 [log]
 disable-timestamp = false
-level = "info"
+level = "debug"
 format = "text"
 filename = "/tmp/aphrodite-web/data.log"
 maxsize = 20
@@ -16,4 +19,4 @@ pprof-listen-port = 6060
 
 http-server-port = 8080
 
-path-html = "/Users/shepard/Workspace/space-go/project/src/github.com/eviltomorrow/aphrodite-web/html"
+path-html = "/home/shepard/workspace/space-go/project/src/github.com/eviltomorrow/aphrodite-web/html"

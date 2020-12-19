@@ -11,6 +11,8 @@ import (
 	"strings"
 	"syscall"
 
+	"github.com/eviltomorrow/aphrodite-web/middleware"
+
 	"github.com/eviltomorrow/aphrodite-web/cache"
 
 	//
@@ -106,7 +108,17 @@ func setupGlobalVars() {
 	db.MySQLMaxOpen = cfg.MySQL.MaxOpen
 
 	app.Port = cfg.System.HTTPServerPort
+
+	fi, err := os.Stat(cfg.System.PathHTML)
+	if err != nil {
+		zlog.Fatal("Load html path failure", zap.Error(err))
+	}
+	if !fi.IsDir() {
+		zlog.Fatal("HTML path is not a valid dir")
+	}
 	app.PathHTML = cfg.System.PathHTML
+
+	middleware.LogPath = filepath.Join(filepath.Dir(cfg.Log.FileName), "access.log")
 }
 
 func printInfo() {

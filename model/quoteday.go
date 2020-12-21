@@ -3,8 +3,9 @@ package model
 import (
 	"context"
 
-	"github.com/eviltomorrow/aphrodite-web/db"
 	jsoniter "github.com/json-iterator/go"
+
+	"github.com/eviltomorrow/aphrodite-web/db"
 )
 
 // SelectQuoteDay select quote day

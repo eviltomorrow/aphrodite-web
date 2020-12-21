@@ -4,6 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"net/http"
+	_ "net/http/pprof"
 	"os"
 	"os/signal"
 	"path/filepath"
@@ -11,21 +13,15 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/eviltomorrow/aphrodite-web/middleware"
-
-	"github.com/eviltomorrow/aphrodite-web/cache"
-
-	//
-	"net/http"
-	_ "net/http/pprof"
-
 	"go.uber.org/zap"
 
 	"github.com/eviltomorrow/aphrodite-base/tools"
 	"github.com/eviltomorrow/aphrodite-base/zlog"
 	"github.com/eviltomorrow/aphrodite-web/app"
+	"github.com/eviltomorrow/aphrodite-web/cache"
 	"github.com/eviltomorrow/aphrodite-web/config"
 	"github.com/eviltomorrow/aphrodite-web/db"
+	"github.com/eviltomorrow/aphrodite-web/middleware"
 )
 
 const (
@@ -146,8 +142,8 @@ func checkpid() {
 }
 
 func registerCleanupFunc() {
-	db.CloseMySQL()
-	cache.CloseRedis()
+	cpf = append(cpf, db.CloseMySQL)
+	cpf = append(cpf, cache.CloseRedis)
 }
 
 func startupPProfService() {

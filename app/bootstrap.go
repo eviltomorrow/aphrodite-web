@@ -35,5 +35,5 @@ func Startup() {
 	engine.LoadHTMLGlob(fmt.Sprintf("%s/*.html", PathHTML))
 	engine.GET("/", controller.Index)
 
-	engine.Run(fmt.Sprintf(":%d", Port))
+	go func() { engine.Run(fmt.Sprintf(":%d", Port)) }()
 }

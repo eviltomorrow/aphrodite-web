@@ -5,11 +5,11 @@ import (
 	"io"
 	"time"
 
-	"github.com/eviltomorrow/aphrodite-base/zlog"
-	"go.uber.org/zap"
-
 	"github.com/gin-gonic/gin"
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
+	"go.uber.org/zap"
+
+	"github.com/eviltomorrow/aphrodite-base/zlog"
 )
 
 // LogPath log path

@@ -5,10 +5,11 @@ import (
 	"database/sql"
 	"time"
 
-	"github.com/eviltomorrow/aphrodite-base/zlog"
 	//
 	_ "github.com/go-sql-driver/mysql"
 	"go.uber.org/zap"
+
+	"github.com/eviltomorrow/aphrodite-base/zlog"
 )
 
 //

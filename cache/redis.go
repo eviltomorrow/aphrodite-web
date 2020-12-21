@@ -4,9 +4,10 @@ import (
 	"context"
 	"time"
 
-	"github.com/eviltomorrow/aphrodite-base/zlog"
 	"github.com/go-redis/redis/v8"
 	"go.uber.org/zap"
+
+	"github.com/eviltomorrow/aphrodite-base/zlog"
 )
 
 // RedisDSN redis dsn
@@ -35,6 +36,8 @@ func BuildRedis() {
 
 // CloseRedis close redis
 func CloseRedis() error {
+	zlog.Info("Close redis connection", zap.String("dsn", RedisDSN))
+
 	if Redis != nil {
 		return Redis.Close()
 	}

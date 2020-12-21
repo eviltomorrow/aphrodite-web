@@ -17,20 +17,7 @@ import (
 
 // Index index
 func Index(c *gin.Context) {
-	var yesterday = time.Now().AddDate(0, 0, -2)
-	var date string
-	switch yesterday.Weekday() {
-	case time.Saturday:
-		date = yesterday.AddDate(0, 0, -1).Format("2006-01-02")
-
-	case time.Sunday:
-		date = yesterday.AddDate(0, 0, -2).Format("2006-01-02")
-
-	default:
-		date = yesterday.Format("2006-01-02")
-
-	}
-
+	var date = calculateRecordDate().Format("2006-01-02")
 	quotes, err := getCache(date)
 	if err == nil {
 		zlog.Debug("Get quotes from redis cache success", zap.Int("quotes-count", len(quotes)))
@@ -94,4 +81,35 @@ func getCache(key string) ([]*model.QuoteDay, error) {
 		return nil, err
 	}
 	return quotes, nil
+}
+
+func calculateRecordDate() time.Time {
+	var now = time.Now()
+	var point = time.Date(now.Year(), now.Month(), now.Day(), 23, 10, 0, 0, time.Local)
+
+	switch now.Weekday() {
+	case time.Monday:
+		if now.After(point) {
+			return now.AddDate(0, 0, -3) // 星期五
+		}
+		return now.AddDate(0, 0, -4) // 星期四
+
+	case time.Tuesday:
+		if now.After(point) {
+			return now.AddDate(0, 0, -1) // 星期一
+		}
+		return now.AddDate(0, 0, -4) // 星期五
+
+	case time.Wednesday, time.Thursday, time.Friday:
+		if now.After(point) {
+			return now.AddDate(0, 0, -1) // 星期二， 星期三， 星期四
+		}
+		return now.AddDate(0, 0, -2) // 星期一， 星期二， 星期三
+
+	case time.Saturday:
+		return now.AddDate(0, 0, -2) // 星期四
+
+	default:
+		return now.AddDate(0, 0, -3) // 星期四
+	}
 }

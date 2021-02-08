@@ -9,6 +9,7 @@ import (
 	"os"
 	"os/signal"
 	"path/filepath"
+	"runtime"
 	"runtime/debug"
 	"strings"
 	"syscall"
@@ -32,8 +33,10 @@ const (
 
 //
 var (
-	GitTag    = ""
-	BuildTime = ""
+	GitSha      = ""
+	GitTag      = ""
+	BuildTime   = ""
+	MainVersion = "v1.0.00"
 )
 
 var (
@@ -122,12 +125,13 @@ func printInfo() {
 }
 
 func printVersion() {
-	var format = `Git Tag: %s
-Build Time: %s
-`
-	fmt.Printf(format, GitTag, BuildTime)
+	fmt.Printf("Aphrodite-calculate Version (Main): %s\r\n", MainVersion)
+	fmt.Printf("Go Version: %s\r\n", runtime.Version())
+	fmt.Printf("Go OS/Arch: %s/%s\r\n", runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("Git Sha: %s\r\n", GitSha)
+	fmt.Printf("Git Tag: %s\r\n", GitTag)
+	fmt.Printf("Build Time: %s\r\n", BuildTime)
 }
-
 func overrideFlags(cfg *config.Config) {
 
 }
